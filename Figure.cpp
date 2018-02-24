@@ -5,6 +5,7 @@
 #include "Figure.hpp"
 
 void Figure::setFigure(int type,sf::Texture *texture) {
+    this->alive = true;
     this->index=abs(type);                   //type of figure
     this->faction = (type<0)? 0:1;      //black or white?
     if(index == PAWN){
@@ -44,6 +45,9 @@ bool Figure::isLegalMove(sf::Vector2f old_coords, sf::Vector2f new_coords){
     return false;
 }
 
+void Figure::setDead(){
+    alive = (alive)? false:true;
+}
 
 int Figure::getHeight() const {
     return height;
@@ -61,7 +65,9 @@ int Figure::getFaction() const {
     return faction;
 }
 
-
+bool Figure::isAlive(){
+    return alive;
+}
 
 //Checking Legality of moves by figure type
 

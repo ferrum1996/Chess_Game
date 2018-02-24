@@ -8,21 +8,22 @@
 Figure f[32];
 ChessBoard board;
 int turn=1;
+int cell_size;
 
 void loadTheBoard(sf::Texture* texture);
-void toBoardCordinates(sf::Vector2f coordSprite);
+std::string toBoardCoordinates(sf::Vector2f coordSprite, int height);
 int* newMove(sf::Vector2f old_coords, sf::Vector2f new_coords, int index_k, int index_v);
                                                                 //k - killer , v - victim;
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
 
-    std::stack <int *> moves; //stack of all moves
+    std::stack <int *> moves;   //stack of all moves
     sf::Vector2f old_coords, new_coords; //coordinates of start and end positions of a moving figure
-    bool moving = false;
+    bool moving = false;        //flag of moving phase
 
 
-    int dx, dy, i, j, cell_size;
+    int dx, dy, i, j, k=-1;
     char* engine = strdup("stockfish.exe");
 
     ConnectToEngine(engine);
@@ -75,22 +76,38 @@ int main() {
             if(event.type == sf::Event::MouseButtonReleased){
                 if(event.mouseButton.button == sf::Mouse::Left){
                     moving = false;
+
+                    if(f[j].getFaction() == turn){
+
+                        //positioning in the center of the cell
                     int px = (f[j].sprite.getPosition().x+f[j].getWidth()/2)/cell_size;
                     px = cell_size*px +(cell_size-f[j].getWidth())/2;
                     int py = (f[j].sprite.getPosition().y+f[j].getHeight()/2)/cell_size;
                     py = py*cell_size +(cell_size-f[j].getHeight());
+                    //end of positioning
+
                     new_coords = sf::Vector2f(float(px), float(py));
-                    if(f[j].getFaction() == turn){
                         if(old_coords!=new_coords && f[j].isLegalMove(old_coords, new_coords)){
                             f[j].sprite.setPosition(new_coords.x, new_coords.y);
+                            for(i=0; i<32; ++i){
+                                if(f[j].getFaction()!=f[i].getFaction()){  //only different factions can kill
+                                    if(i!=j && f[i].isAlive() && (toBoardCoordinates(f[i].sprite.getPosition(), f[i].getHeight()) ==
+                                        toBoardCoordinates(f[j].sprite.getPosition(), f[j].getHeight()))){
+                                        f[i].setDead(); //Killing the figure that was in  the cell;
+                                        k=i;
+                                        f[i].sprite.setPosition(520, 520);
+                                    }
+                                }
+                            }
                             turn = (turn == 0) ? 1 : 0;
-                            moves.push(newMove(old_coords, new_coords, j, 0));
+                            moves.push(newMove(old_coords, new_coords, j, k));
+                            k=-1;
                         }
                         else {
                             f[j].sprite.setPosition(old_coords.x, old_coords.y);
                         }
                     }
-                    toBoardCordinates(f[j].sprite.getPosition());
+                    std::cout << toBoardCoordinates(f[j].sprite.getPosition(), f[j].getHeight())<< std::endl;
                 }
             }
             if(event.type == sf::Event::KeyPressed){
@@ -98,6 +115,10 @@ int main() {
                     if(!moves.empty()){
                         int* last_move = moves.top();
                         f[last_move[4]].sprite.setPosition(last_move[0], last_move[1]);
+                        if(last_move[5]!=-1){
+                            f[last_move[5]].sprite.setPosition(last_move[2], last_move[3]);
+                            f[last_move[5]].setDead();  //revive the figure
+                        }
                         moves.pop();
                         free(last_move);
                     }
@@ -112,6 +133,7 @@ int main() {
 
         window.draw(board.getSprite());
         for(i=0; i<32; i++){
+            if(f[i].isAlive())
             window.draw(f[i].sprite);
         }
 
@@ -139,11 +161,11 @@ void loadTheBoard(sf::Texture *texture)
 
 }
 
-void toBoardCordinates(sf::Vector2f coordSprite){
+std::string toBoardCoordinates(sf::Vector2f coordSprite, int height){
     std::string coordBoard ="";
     coordBoard += (char)(int(coordSprite.x/65) + 97);
-    coordBoard += (char)(int(coordSprite.y/65) + 49);
-    std::cout << coordBoard <<std::endl;
+    coordBoard += (char)(int((coordSprite.y+height-cell_size)/65) + 49);
+    return coordBoard;
 }
 
 int* newMove(sf::Vector2f old_coords, sf::Vector2f new_coords, int index_k, int index_v){

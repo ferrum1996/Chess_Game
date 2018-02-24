@@ -36,18 +36,20 @@ protected :
     int width;
     int faction; //colour of a figure
     int index;
+    bool alive;
 
 public:
     sf::Sprite sprite;
     void setFigure(int type, sf::Texture *texture);
+    void setDead();
 
     bool isLegalMove(sf::Vector2f old_coords, sf::Vector2f new_coords);
 
     int getIndex() const;
     int getHeight() const;
     int getWidth() const;
-
     int getFaction() const;
+    bool isAlive();
 };
 
 bool isPawnLegalMove (sf::Vector2f old_coords, sf::Vector2f new_coords);
