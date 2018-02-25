@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "D:/workspace/Chess_SFML&C++/ChessBoard.cpp" "D:/workspace/Chess_SFML&C++/cmake-build-debug/CMakeFiles/Chess_SFML_C__.dir/ChessBoard.cpp.obj"
   "D:/workspace/Chess_SFML&C++/Figure.cpp" "D:/workspace/Chess_SFML&C++/cmake-build-debug/CMakeFiles/Chess_SFML_C__.dir/Figure.cpp.obj"
+  "D:/workspace/Chess_SFML&C++/Game.cpp" "D:/workspace/Chess_SFML&C++/cmake-build-debug/CMakeFiles/Chess_SFML_C__.dir/Game.cpp.obj"
   "D:/workspace/Chess_SFML&C++/main.cpp" "D:/workspace/Chess_SFML&C++/cmake-build-debug/CMakeFiles/Chess_SFML_C__.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

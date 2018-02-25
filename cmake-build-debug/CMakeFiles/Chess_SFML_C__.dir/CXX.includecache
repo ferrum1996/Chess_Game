@@ -672,7 +672,13 @@ iostream
 cmath
 -
 
-D:/workspace/Chess_SFML&C++/main.cpp
+D:/workspace/Chess_SFML&C++/Game.cpp
+Game.hpp
+D:/workspace/Chess_SFML&C++/Game.hpp
+Connector.hpp
+D:/workspace/Chess_SFML&C++/Connector.hpp
+
+D:/workspace/Chess_SFML&C++/Game.hpp
 iostream
 -
 SFML/Graphics.hpp
@@ -681,8 +687,20 @@ stack
 -
 Figure.hpp
 D:/workspace/Chess_SFML&C++/Figure.hpp
-Connector.hpp
-D:/workspace/Chess_SFML&C++/Connector.hpp
 ChessBoard.hpp
 D:/workspace/Chess_SFML&C++/ChessBoard.hpp
+cstring
+-
+
+D:/workspace/Chess_SFML&C++/main.cpp
+iostream
+-
+SFML/Graphics.hpp
+-
+Game.hpp
+D:/workspace/Chess_SFML&C++/Game.hpp
+stack
+-
+cstring
+-
 

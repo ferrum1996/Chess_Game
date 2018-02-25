@@ -99,6 +99,12 @@
 		<Unit filename="D:/workspace/Chess_SFML&amp;C++/Figure.hpp">
 			<Option target="Chess_SFML_C__"/>
 		</Unit>
+		<Unit filename="D:/workspace/Chess_SFML&amp;C++/Game.cpp">
+			<Option target="Chess_SFML_C__"/>
+		</Unit>
+		<Unit filename="D:/workspace/Chess_SFML&amp;C++/Game.hpp">
+			<Option target="Chess_SFML_C__"/>
+		</Unit>
 		<Unit filename="D:/workspace/Chess_SFML&amp;C++/main.cpp">
 			<Option target="Chess_SFML_C__"/>
 		</Unit>

@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Chess_SFML_C__.dir/main.cpp.obj"
   "CMakeFiles/Chess_SFML_C__.dir/Figure.cpp.obj"
   "CMakeFiles/Chess_SFML_C__.dir/ChessBoard.cpp.obj"
+  "CMakeFiles/Chess_SFML_C__.dir/Game.cpp.obj"
   "Chess_SFML_C__.pdb"
   "Chess_SFML_C__.exe"
   "Chess_SFML_C__.exe.manifest"
